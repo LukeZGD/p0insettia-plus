@@ -1,15 +1,8 @@
-#/bin/sh
-
-#define
-
-BUILD="BUILD_11D257"
-#BUILD="BUILD_11D201"
-#BUILD="BUILD_11D167"
+#!/bin/bash
 
 rm gen_fw
 
 cd ../Injector
-clang untether.c partialzip/partial.c static/*.a -o gen_fw -I./include -framework Security -framework LDAP -Os -DN42 -DHAVE_IBOOT_EXPLOIT -D"$BUILD"
-strip gen_fw
+clang untether.c -o gen_fw -I./include -DN42 -DHAVE_IBOOT_EXPLOIT
 
-mv gen_fw ../untether
+mv gen_fw untether

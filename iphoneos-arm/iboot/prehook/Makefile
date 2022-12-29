@@ -31,7 +31,8 @@ CFLAGS += -fcall-used-r9
 LD = $(GNUARM_PREFIX)gcc
 LDFLAGS = -L. -nostdlib
 LDFLAGS += -Tscript.ld
-LDLIBS = -lp
+LDFLAGS += -Wl,--allow-multiple-definition
+LDLIBS = -lp -lgcc
 
 AR = $(GNUARM_PREFIX)ar
 ARFLAGS = crus

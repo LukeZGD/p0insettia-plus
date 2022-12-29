@@ -25,8 +25,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
-#include <partial.h>
+#include <string.h>
 
 #define N42 (1) // n41/n42 only
 #define A6_IBOOT_LOADADDR_BASE  (0x80000000)
@@ -261,50 +260,12 @@ static void patch_iboot(const char* path)
     
 }
 
-static int dl_file(const char* url, const char* path, const char* realpath)
-{
-    int r;
-    printf("[%s] Downloading image: %s ...\n", __FUNCTION__, realpath);
-    r = partialzip_download_file(url, path, realpath);
-    if(r != 0){
-        printf("[%s] ERROR: Failed to get image!\n", __FUNCTION__);
-        return -1;
-    }
-    return 0;
-}
-
 int main(void)
 {
 
-    int r;
-    
-    const char* outdir = "image3/";
-    DIR *d = opendir(outdir);
-    if (!d) {
-        printf("[%s] Making directory: %s\n", __FUNCTION__, outdir);
-        r = mkdir(outdir, 0755);
-        if(r != 0){
-            printf("[%s] ERROR: Failed to make dir: %s!\n", __FUNCTION__, outdir);
-            return -1;
-        }
-    }
-
 #ifdef N42
-    if(open("image3/rrdsk", O_RDONLY) == -1) {
-        if(dl_file("https://updates.cdn-apple.com/2019/ios/091-25277-20190722-0C1B94DE-992C-11E9-A2EE-E2C9A77C2E40/iPhone_4.0_32bit_10.3.4_14G61_Restore.ipsw", "058-75249-065.dmg", "image3/rrdsk") != 0) {
-            return -1;
-        }
-    }
-    
-    if(open("image3/iBoot.n42", O_RDONLY) == -1) {
-        if(dl_file("https://updates.cdn-apple.com/2019/ios/091-25277-20190722-0C1B94DE-992C-11E9-A2EE-E2C9A77C2E40/iPhone_4.0_32bit_10.3.4_14G61_Restore.ipsw", "Firmware/dfu/iBEC.iphone5.RELEASE.dfu", "image3/iBoot.n42") != 0) {
-            return -1;
-        } else {
-            patch_iboot("image3/iBoot.n42");
-        }
-    }
-    
+    patch_iboot("image3/iBoot.n42");
 #endif
-    
+
     return 0;
 }

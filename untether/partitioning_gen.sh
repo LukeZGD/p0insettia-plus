@@ -1,25 +1,31 @@
-#/bin/sh
+#!/bin/bash
 
 rm -rf image3/idsk
+dl_files="../build/dl_files"
+hfsplus="$hfsplus"
+xpwntool="../build/xpwntool"
+if [[ $(uname) == "Linux" ]]; then
+    dl_files+="_linux"
+    hfsplus+="_linux"
+    xpwntool+="_linux"
+fi
 
-../build/dl_files
+$xpwntool image3/rrdsk image3/rrdsk.dmg
 
-../build/xpwntool image3/rrdsk image3/rrdsk.dmg
+$hfsplus image3/rrdsk.dmg grow 40000000
 
-hdiutil resize image3/rrdsk.dmg -size 40m
+$hfsplus image3/rrdsk.dmg untar src/binSB.tar
 
-../build/hfsplus image3/rrdsk.dmg untar src/binSB.tar
+$hfsplus image3/rrdsk.dmg mv usr/local/bin/restored_external usr/local/bin/restored_external_
+$hfsplus image3/rrdsk.dmg add src/n42/11d257/partition usr/local/bin/restored_external
+$hfsplus image3/rrdsk.dmg chmod 755 usr/local/bin/restored_external
+$hfsplus image3/rrdsk.dmg chown 0:0 usr/local/bin/restored_external
 
-../build/hfsplus image3/rrdsk.dmg mv usr/local/bin/restored_external usr/local/bin/restored_external_
-../build/hfsplus image3/rrdsk.dmg add src/n42/11d257/partition usr/local/bin/restored_external
-../build/hfsplus image3/rrdsk.dmg chmod 755 usr/local/bin/restored_external
-../build/hfsplus image3/rrdsk.dmg chown 0:0 usr/local/bin/restored_external
+$hfsplus image3/rrdsk.dmg add src/n42/11d257/exploit.dmg exploit.dmg
+$hfsplus image3/rrdsk.dmg chmod 644 exploit.dmg
+$hfsplus image3/rrdsk.dmg chown 0:0 exploit.dmg
 
-../build/hfsplus image3/rrdsk.dmg add src/n42/11d257/exploit.dmg exploit.dmg
-../build/hfsplus image3/rrdsk.dmg chmod 644 exploit.dmg
-../build/hfsplus image3/rrdsk.dmg chown 0:0 exploit.dmg
-
-../build/xpwntool image3/rrdsk.dmg image3/idsk -t image3/rrdsk
+$xpwntool image3/rrdsk.dmg image3/idsk -t image3/rrdsk
 rm -rf image3/rrdsk.dmg
 
 echo "[*] done!"

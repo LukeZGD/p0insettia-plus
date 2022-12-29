@@ -1,16 +1,16 @@
-#/bin/sh
+#!/bin/bash
 
 echo "Run it only once!"
-
-../build/ipwnder_lite -p
-sleep 1
-
-../build/irecovery -f image3/iBoot.n42
+irecovery="../build/irecovery"
+if [[ $(uname) == "Linux" ]]; then
+    irecovery+="_linux"
+fi
+$irecovery -f image3/iBoot.n42
 sleep 5
 
-../build/irecovery -f image3/idsk
-../build/irecovery -c "ramdisk"
+$irecovery -f image3/idsk
+$irecovery -c "ramdisk"
 sleep 1
 
-../build/irecovery -f ../iphoneos-arm/iboot/payload_rd
-../build/irecovery -c "go"
+$irecovery -f ../iphoneos-arm/iboot/payload_rd
+$irecovery -c "go"

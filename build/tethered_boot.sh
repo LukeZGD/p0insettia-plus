@@ -1,10 +1,14 @@
-#/bin/sh
+#!/bin/bash
 
-./ipwnder_lite -p
-sleep 1
+cd "$(dirname $0)"
 
-./irecovery -f image3/iBoot.n42
+irecovery="./irecovery"
+if [[ $(uname) == "Linux" ]]; then
+    irecovery+="_linux"
+fi
+
+$irecovery -f image3/iBoot.n42
 sleep 5
 
-./irecovery -f ../iphoneos-arm/iboot/payload
-./irecovery -c "go"
+$irecovery -f ../iphoneos-arm/iboot/payload
+$irecovery -c "go"

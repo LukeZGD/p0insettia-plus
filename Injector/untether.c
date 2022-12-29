@@ -25,8 +25,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
-#include <partial.h>
+#include <string.h>
 
 //#define N42 (1) // n41/n42 only
 #define A6_IBOOT_LOADADDR_BASE  (0x80000000)
@@ -261,165 +260,12 @@ static void patch_iboot(const char* path)
     
 }
 
-static int dl_file(const char* url, const char* path, const char* realpath)
-{
-    int r;
-    printf("[%s] Downloading image: %s ...\n", __FUNCTION__, realpath);
-    r = partialzip_download_file(url, path, realpath);
-    if(r != 0){
-        printf("[%s] ERROR: Failed to get image!\n", __FUNCTION__);
-        return -1;
-    }
-    return 0;
-}
-
-static int make_dir(const char *path)
-{
-    int r;
-    DIR *d = opendir(path);
-    if (!d) {
-        printf("[%s] Making directory: %s\n", __FUNCTION__, path);
-        r = mkdir(path, 0755);
-        if(r != 0){
-            printf("[%s] ERROR: Failed to make dir: %s!\n", __FUNCTION__, path);
-            return -1;
-        }
-    }
-    return 0;
-}
-
 int main(void)
 {
-    int r = -1;
-    char *restore_url = NULL;
-    char *url = NULL;
-    
-    if (make_dir("fw/") == 0) {
-        if (make_dir("fw/Firmware/") == 0) {
-            if (make_dir("fw/Firmware/all_flash/") == 0) {
-                if (make_dir("fw/Firmware/dfu/") == 0) {
-                    if (make_dir("fw/Firmware/usr/") == 0) {
-                        if (make_dir("fw/Firmware/usr/local/") == 0) {
-                            if (make_dir("fw/Firmware/usr/local/standalone/") == 0) {
-                                r = 0;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    if(r != 0) return -1;
-    
-#ifdef N42
-    restore_url = "https://secure-appldnld.apple.com/iOS7.1/031-4798.20140627.fpeqS/iPhone5,2_7.1.2_11D257_Restore.ipsw";
-    
-    if (make_dir("fw/Firmware/all_flash/all_flash.n42ap.production/") != 0) {
-        return -1;
-    }
-    
-#ifdef BUILD_11D257
-    // basefw: 7.1.2 [11D257]
-    r = -1;
-    url = "https://secure-appldnld.apple.com/iOS7.1/031-4798.20140627.fpeqS/iPhone5,2_7.1.2_11D257_Restore.ipsw";
-#endif
-    
-#ifdef BUILD_11D201
-    // untested
-    r = -1;
-    url = "https://secure-appldnld.apple.com/iOS7.1/031-00272.20140425.YvPzG/iPhone5,2_7.1.1_11D201_Restore.ipsw";
-#endif
-    
-#ifdef BUILD_11D167
-    // untested
-    r = -1;
-    url = "https://secure-appldnld.apple.com/iOS7.1/031-00272.20140425.YvPzG/iPhone5,2_7.1.1_11D201_Restore.ipsw";
-#endif
-    
-    // ramdisk
-    if(dl_file(restore_url, "058-4276-009.dmg", "fw/058-4276-009.dmg") != 0) {
-        return -1;
-    }
-    // restorekc
-    if(dl_file(restore_url, "kernelcache.release.n42", "fw/kernelcache.release.n42") != 0) {
-        return -1;
-    }
-    // ibec
-    if(dl_file(restore_url, "Firmware/dfu/iBEC.n42ap.RELEASE.dfu", "fw/Firmware/dfu/iBEC.n42ap.RELEASE.dfu") != 0) {
-        return -1;
-    }
-    // ibss
-    if(dl_file(restore_url, "Firmware/dfu/iBSS.n42ap.RELEASE.dfu", "fw/Firmware/dfu/iBSS.n42ap.RELEASE.dfu") != 0) {
-        return -1;
-    }
-    // restore devicetree
-    if(dl_file(restore_url, "Firmware/all_flash/all_flash.n42ap.production/DeviceTree.n42ap.img3", "fw/Firmware/all_flash/all_flash.n42ap.production/DeviceTree.n42ap.img3") != 0) {
-        return -1;
-    }
-    // applelogo
-    if(dl_file(url, "Firmware/all_flash/all_flash.n42ap.production/applelogo@2x~iphone.s5l8950x.img3", "fw/Firmware/all_flash/all_flash.n42ap.production/applelogo@2x~iphone.s5l8950x.img3") != 0) {
-        return -1;
-    }
-    // batterycharging0
-    if(dl_file(url, "Firmware/all_flash/all_flash.n42ap.production/batterycharging0@2x~iphone.s5l8950x.img3", "fw/Firmware/all_flash/all_flash.n42ap.production/batterycharging0@2x~iphone.s5l8950x.img3") != 0) {
-        return -1;
-    }
-    // batterycharging1
-    if(dl_file(url, "Firmware/all_flash/all_flash.n42ap.production/batterycharging1@2x~iphone.s5l8950x.img3", "fw/Firmware/all_flash/all_flash.n42ap.production/batterycharging1@2x~iphone.s5l8950x.img3") != 0) {
-        return -1;
-    }
-    // batteryfull
-    if(dl_file(url, "Firmware/all_flash/all_flash.n42ap.production/batteryfull@2x~iphone.s5l8950x.img3", "fw/Firmware/all_flash/all_flash.n42ap.production/batteryfull@2x~iphone.s5l8950x.img3") != 0) {
-        return -1;
-    }
-    // batterylow0
-    if(dl_file(url, "Firmware/all_flash/all_flash.n42ap.production/batterylow0@2x~iphone.s5l8950x.img3", "fw/Firmware/all_flash/all_flash.n42ap.production/batterylow0@2x~iphone.s5l8950x.img3") != 0) {
-        return -1;
-    }
-    // batterylow1
-    if(dl_file(url, "Firmware/all_flash/all_flash.n42ap.production/batterylow1@2x~iphone.s5l8950x.img3", "fw/Firmware/all_flash/all_flash.n42ap.production/batterylow1@2x~iphone.s5l8950x.img3") != 0) {
-        return -1;
-    }
-    // glyphplugin
-    if(dl_file(url, "Firmware/all_flash/all_flash.n42ap.production/glyphplugin@1136~iphone-lightning.s5l8950x.img3", "fw/Firmware/all_flash/all_flash.n42ap.production/glyphplugin@1136~iphone-lightning.s5l8950x.img3") != 0) {
-        return -1;
-    }
-    // iBoot7
-    if(dl_file(url, "Firmware/all_flash/all_flash.n42ap.production/iBoot.n42ap.RELEASE.img3", "fw/Firmware/all_flash/all_flash.n42ap.production/iBoot.n42ap.RELEASE.img3") != 0) {
-        return -1;
-    }
-    // LLB
-    if(dl_file(url, "Firmware/all_flash/all_flash.n42ap.production/LLB.n42ap.RELEASE.img3", "fw/Firmware/all_flash/all_flash.n42ap.production/LLB.n42ap.RELEASE.img3") != 0) {
-        return -1;
-    }
-    // recoverymode
-    if(dl_file(url, "Firmware/all_flash/all_flash.n42ap.production/recoverymode@1136~iphone-lightning.s5l8950x.img3", "fw/Firmware/all_flash/all_flash.n42ap.production/recoverymode@1136~iphone-lightning.s5l8950x.img3") != 0) {
-        return -1;
-    }
-    
-    // DeviceTree
-    if(dl_file("https://updates.cdn-apple.com/2019/ios/091-25277-20190722-0C1B94DE-992C-11E9-A2EE-E2C9A77C2E40/iPhone_4.0_32bit_10.3.4_14G61_Restore.ipsw", "Firmware/all_flash/DeviceTree.n42ap.img3", "fw/Firmware/all_flash/all_flash.n42ap.production/DeviceTreeX.n42ap.img3") != 0) {
-        return -1;
-    }
-    
-    // iBootX
-    if(dl_file("https://updates.cdn-apple.com/2019/ios/091-25277-20190722-0C1B94DE-992C-11E9-A2EE-E2C9A77C2E40/iPhone_4.0_32bit_10.3.4_14G61_Restore.ipsw", "Firmware/dfu/iBEC.iphone5.RELEASE.dfu", "fw/Firmware/all_flash/all_flash.n42ap.production/iBootX.n42ap.RELEASE.img3") != 0) {
-        return -1;
-    } else {
-        patch_iboot("fw/Firmware/all_flash/all_flash.n42ap.production/iBootX.n42ap.RELEASE.img3");
-    }
 
+#ifdef N42
+    patch_iboot("fw/Firmware/all_flash/all_flash.n42ap.production/iBootX.n42ap.RELEASE.img3");
 #endif
-    
-    // bm
-    if(dl_file(restore_url, "BuildManifest.plist", "fw/BuildManifest.plist") != 0) {
-        return -1;
-    }
-    // rp
-    if(dl_file(restore_url, "Restore.plist", "fw/Restore.plist") != 0) {
-        return -1;
-    }
     
     return 0;
 }

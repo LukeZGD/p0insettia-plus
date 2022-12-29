@@ -11,11 +11,6 @@ untether/gen_fw
 untether/version.xml
 untether/restorenand*
 untether/shsh/*.shsh
-iphoneos-arm/launchd/launchd
-iphoneos-arm/rdsk/restored_external
-iphoneos-arm/iboot/payload
-iphoneos-arm/iboot/payload_rd
-iphoneos-arm/iboot/payload_untether
 iphoneos-arm/iboot/prehook/payload.h
 iphoneos-arm/iboot/prehook/payload
 iphoneos-arm/iboot/prehook/payload.elf
