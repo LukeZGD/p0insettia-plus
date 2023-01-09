@@ -2,7 +2,7 @@
 
 rm -rf image3/rdsk
 
-cd "$(dirname $0)"
+cd "$(dirname "$0")"
 hfsplus="$hfsplus"
 xpwntool="$xpwntool"
 if [[ $(uname) == "Linux" ]]; then

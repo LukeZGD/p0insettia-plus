@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd "$(dirname $0)"
+cd "$(dirname "$0")"
 
 dl_files="./dl_files_linux"
 partialzip="./partialzip_linux"

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd "$(dirname "$0")"
 # N42 11D257
 DEVICE="n42ap"
 VERSION="11D257"

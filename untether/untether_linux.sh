@@ -1,7 +1,7 @@
 #!/bin/bash
 
 untether="./untether_linux"
-partialzip="./partialzip_linux"
+partialzip="../build/partialzip_linux"
 
 mkdir -p fw/Firmware/all_flash/all_flash.n42ap.production fw/Firmware/dfu fw/Firmware/usr/local/standalone 2>/dev/null
 restore_url="https://secure-appldnld.apple.com/iOS7.1/031-4798.20140627.fpeqS/iPhone5,2_7.1.2_11D257_Restore.ipsw"

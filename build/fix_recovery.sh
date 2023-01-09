@@ -1,3 +1,0 @@
-#/bin/sh
-
-./irecovery -n

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd "$(dirname "$0")"
 echo "Run it only once!"
 irecovery="../build/irecovery"
 if [[ $(uname) == "Linux" ]]; then

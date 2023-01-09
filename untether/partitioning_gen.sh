@@ -1,8 +1,9 @@
 #!/bin/bash
 
+cd "$(dirname "$0")"
 rm -rf image3/idsk
 dl_files="../build/dl_files"
-hfsplus="$hfsplus"
+hfsplus="../build/hfsplus"
 xpwntool="../build/xpwntool"
 if [[ $(uname) == "Linux" ]]; then
     dl_files+="_linux"
