@@ -10,20 +10,20 @@ All at your own risk!
 
 ## setup
 ```
-./dl_files
+./dl_files.sh
 ./ramdisk_gen.sh
 ```
 
 ## Usage 
 ### Install loader / cydia  
 The first step is to add the loader app to the rootfs of the device.  
-Please set the device to DFU Mode, connect it, and run the following script.  
+Please set the device to pwned DFU Mode, connect it, and run the following script.  
 ```
 ./ramdisk_boot.sh
 ```
 
 The device will reboot and enter recovery mode.  
-Please set the device to DFU Mode, connect it, and run the following script.  
+Please set the device to pwned DFU Mode, connect it, and run the following script.  
 ```
 ./tethered_boot.sh
 ```
@@ -38,7 +38,7 @@ The device will reboot and enter recovery mode.
 
 
 ### reboot and setup Cydia
-Perform the initial startup. Please set the device to DFU Mode, connect it, and run the following script.  
+Perform the initial startup. Please set the device to pwned DFU Mode, connect it, and run the following script.  
 ```
 ./tethered_boot.sh
 ```
@@ -50,10 +50,11 @@ Please turn off your device after the Cydia update is finished.
 ### fix recovery mode
 Now, when you try to reboot your device, it will boot in recovery mode. Connect the device in recovery mode to USB and run the following script.  
 ```
-./fix_recovery.sh
+./irecovery -n
+./irecovery_linux -n # for linux
 ```
 
-The device will reboot and boot in non-jailbreak mode. If you want to boot in a jailbreak environment again, set the device to DFU mode and run the following script.  
+The device will reboot and boot in non-jailbreak mode. If you want to boot in a jailbreak environment again, set the device to pwned DFU mode and run the following script.  
 ```
 ./tethered_boot.sh
 ```

@@ -1,7 +1,7 @@
 # p0insettia
 A tool for [(semi-){un-(tethered jailbreak)}] of iOS 10.3.4 ~~32-bit devices~~ iPhone 5 with checkm8 BootROM exploit.  
 
-For with Linux builds and compiled payloads including untether (requires iOS 7 SHSH blobs). Only tested semi-tether and untether on iPhone5,2 with 7.1.1 (11D201) blobs.
+Fork with Linux builds, updated scripts, and compiled payloads including untether (requires iOS 7 SHSH blobs). Only tested semi-tether and untether on iPhone5,2 10.3.4 with 7.1.1 (11D201) blobs.
 
 ## Note
 - All at your own risk!  

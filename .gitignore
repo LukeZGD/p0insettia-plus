@@ -2,7 +2,6 @@
 .DS_Store
 package.sh
 package/
-build/dl_files
 build/image3
 build/ipwnder_lite
 untether/image3

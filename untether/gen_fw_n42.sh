@@ -1,4 +1,13 @@
-#/bin/sh
+#!/bin/bash
+
+cd "$(dirname "$0")"
+
+hfsplus="../build/hfsplus"
+xpwntool="../build/xpwntool"
+if [[ $(uname) == "Linux" ]]; then
+    hfsplus+="_linux"
+    xpwntool+="_linux"
+fi
 
 # N42 11D257
 DEVICE="n42ap"
@@ -20,47 +29,48 @@ OPTIONNAME="options.n42.plist"
 
 rm -rf fw/
 
-./gen_fw
+./untether.sh "$1"
+[[ $? != 0 ]] && exit 1
 
-../build/xpwntool fw/"$RAMDISK" fw/ramdisk.dmg -iv $RDSK_IV -k $RDSK_KEY
-../build/hfsplus fw/ramdisk.dmg grow 12000000
+$xpwntool fw/"$RAMDISK" fw/ramdisk.dmg -iv $RDSK_IV -k $RDSK_KEY
+$hfsplus fw/ramdisk.dmg grow 12000000
 
-../build/hfsplus fw/ramdisk.dmg extract usr/sbin/asr asr
+$hfsplus fw/ramdisk.dmg extract usr/sbin/asr asr
 bspatch asr asr_p injection/firmware/"$FWBUNDLE"/asr.patch
-../build/hfsplus fw/ramdisk.dmg mv usr/sbin/asr usr/sbin/asr_
-../build/hfsplus fw/ramdisk.dmg add asr_p usr/sbin/asr
-../build/hfsplus fw/ramdisk.dmg chmod 755 usr/sbin/asr
-../build/hfsplus fw/ramdisk.dmg chown 0:0 usr/sbin/asr
+$hfsplus fw/ramdisk.dmg mv usr/sbin/asr usr/sbin/asr_
+$hfsplus fw/ramdisk.dmg add asr_p usr/sbin/asr
+$hfsplus fw/ramdisk.dmg chmod 755 usr/sbin/asr
+$hfsplus fw/ramdisk.dmg chown 0:0 usr/sbin/asr
 
-../build/hfsplus fw/ramdisk.dmg extract usr/local/bin/restored_external restored_external
+$hfsplus fw/ramdisk.dmg extract usr/local/bin/restored_external restored_external
 bspatch restored_external restored_external_p injection/firmware/"$FWBUNDLE"/restored_external.patch
-../build/hfsplus fw/ramdisk.dmg mv usr/local/bin/restored_external usr/local/bin/restored_external_
-../build/hfsplus fw/ramdisk.dmg add restored_external_p usr/local/bin/restored_external
-../build/hfsplus fw/ramdisk.dmg chmod 755 usr/local/bin/restored_external
-../build/hfsplus fw/ramdisk.dmg chown 0:0 usr/local/bin/restored_external
+$hfsplus fw/ramdisk.dmg mv usr/local/bin/restored_external usr/local/bin/restored_external_
+$hfsplus fw/ramdisk.dmg add restored_external_p usr/local/bin/restored_external
+$hfsplus fw/ramdisk.dmg chmod 755 usr/local/bin/restored_external
+$hfsplus fw/ramdisk.dmg chown 0:0 usr/local/bin/restored_external
 
-../build/hfsplus fw/ramdisk.dmg mv usr/local/share/restore/"$OPTIONNAME" usr/local/share/restore/"$OPTIONNAME"_
-../build/hfsplus fw/ramdisk.dmg add injection/options.plist usr/local/share/restore/"$OPTIONNAME"
-../build/hfsplus fw/ramdisk.dmg chmod 644 usr/local/share/restore/"$OPTIONNAME"
-../build/hfsplus fw/ramdisk.dmg chown 0:0 usr/local/share/restore/"$OPTIONNAME"
+$hfsplus fw/ramdisk.dmg mv usr/local/share/restore/"$OPTIONNAME" usr/local/share/restore/"$OPTIONNAME"_
+$hfsplus fw/ramdisk.dmg add injection/options.plist usr/local/share/restore/"$OPTIONNAME"
+$hfsplus fw/ramdisk.dmg chmod 644 usr/local/share/restore/"$OPTIONNAME"
+$hfsplus fw/ramdisk.dmg chown 0:0 usr/local/share/restore/"$OPTIONNAME"
 
 mv fw/"$RAMDISK" fw/tmp.dmg
-../build/xpwntool fw/ramdisk.dmg fw/"$RAMDISK" -t fw/tmp.dmg
+$xpwntool fw/ramdisk.dmg fw/"$RAMDISK" -t fw/tmp.dmg
 
 # ibss
-../build/xpwntool fw/Firmware/dfu/"$IBSS".dfu fw/Firmware/dfu/"$IBSS".dec -iv $IBSS_IV -k $IBSS_KEY
+$xpwntool fw/Firmware/dfu/"$IBSS".dfu fw/Firmware/dfu/"$IBSS".dec -iv $IBSS_IV -k $IBSS_KEY
 bspatch fw/Firmware/dfu/"$IBSS".dec fw/Firmware/dfu/"$IBSS".pwnd injection/firmware/"$FWBUNDLE"/iBSS.patch
 mv fw/Firmware/dfu/"$IBSS".dfu fw/Firmware/dfu/"$IBSS"_TMP.dfu
-../build/xpwntool fw/Firmware/dfu/"$IBSS".pwnd fw/Firmware/dfu/"$IBSS".dfu -t fw/Firmware/dfu/"$IBSS"_TMP.dfu
+$xpwntool fw/Firmware/dfu/"$IBSS".pwnd fw/Firmware/dfu/"$IBSS".dfu -t fw/Firmware/dfu/"$IBSS"_TMP.dfu
 
 # ibec
-../build/xpwntool fw/Firmware/dfu/"$IBEC".dfu fw/Firmware/dfu/"$IBEC".dec -iv $IBEC_IV -k $IBEC_KEY
+$xpwntool fw/Firmware/dfu/"$IBEC".dfu fw/Firmware/dfu/"$IBEC".dec -iv $IBEC_IV -k $IBEC_KEY
 bspatch fw/Firmware/dfu/"$IBEC".dec fw/Firmware/dfu/"$IBEC".pwnd injection/firmware/"$FWBUNDLE"/iBEC.patch
 mv fw/Firmware/dfu/"$IBEC".dfu fw/Firmware/dfu/"$IBEC"_TMP.dfu
-../build/xpwntool fw/Firmware/dfu/"$IBEC".pwnd fw/Firmware/dfu/"$IBEC".dfu -t fw/Firmware/dfu/"$IBEC"_TMP.dfu
+$xpwntool fw/Firmware/dfu/"$IBEC".pwnd fw/Firmware/dfu/"$IBEC".dfu -t fw/Firmware/dfu/"$IBEC"_TMP.dfu
 
 # pyld 
-../build/xpwntool ../iphoneos-arm/iboot/payload_untether fw/Firmware/all_flash/all_flash."$DEVICE".production/applelogoP@2x~iphone.s5l8950x.img3 -t src/pyld_template.img3
+$xpwntool ../iphoneos-arm/iboot/payload_untether fw/Firmware/all_flash/all_flash."$DEVICE".production/applelogoP@2x~iphone.s5l8950x.img3 -t src/pyld_template.img3
 
 # m
 cp -a -v injection/firmware/"$FWBUNDLE"/manifest fw/Firmware/all_flash/all_flash."$DEVICE".production/

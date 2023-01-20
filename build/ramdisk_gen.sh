@@ -1,14 +1,15 @@
 #!/bin/bash
 
-rm -rf image3/rdsk
-
 cd "$(dirname "$0")"
-hfsplus="$hfsplus"
-xpwntool="$xpwntool"
+
+hfsplus="./hfsplus"
+xpwntool="./xpwntool"
 if [[ $(uname) == "Linux" ]]; then
     hfsplus+="_linux"
     xpwntool+="_linux"
 fi
+
+rm -rf image3/rdsk
 
 $xpwntool image3/rrdsk image3/rrdsk.dmg
 
