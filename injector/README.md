@@ -1,7 +1,8 @@
 # p0insettia - Injector
 
 ## Supported environments
-- macOS, Linux
+- macOS 10.13 (or later?) (intel/x86_64)
+- Linux x86_64/armhf/arm64
 
 ## Make 
 ```

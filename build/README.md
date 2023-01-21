@@ -6,9 +6,10 @@ All at your own risk!
 
 ## Supported environments
 - macOS 10.13 (or later?) (intel/x86_64)
-- Linux x86_64
+- Linux x86_64/armhf/arm64
+- For armhf and arm64, copy and replace the binaries from the respective directory
 
-## setup
+## Setup
 ```
 ./dl_files.sh
 ./ramdisk_gen.sh
@@ -37,7 +38,7 @@ Please open it and tap "Install Cydia".
 The device will reboot and enter recovery mode.  
 
 
-### reboot and setup Cydia
+### Reboot and setup Cydia
 Perform the initial startup. Please set the device to pwned DFU Mode, connect it, and run the following script.  
 ```
 ./tethered_boot.sh
@@ -47,7 +48,7 @@ Perform the initial startup. Please set the device to pwned DFU Mode, connect it
 The current version uses an old bootstrap, so please update all packages immediately after opening Cydia.  
 Please turn off your device after the Cydia update is finished.  
 
-### fix recovery mode
+### Fix recovery mode
 Now, when you try to reboot your device, it will boot in recovery mode. Connect the device in recovery mode to USB and run the following script.  
 ```
 ./irecovery -n

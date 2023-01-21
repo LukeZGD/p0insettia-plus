@@ -6,7 +6,8 @@ All at your own risk!
 
 ## Supported environments
 - macOS 10.13 (or later?) (intel/x86_64)
-- Linux x86_64
+- Linux x86_64/armhf/arm64
+- For armhf and arm64, copy and replace the binaries from the respective directory
 
 ## setup
 ```
@@ -23,8 +24,8 @@ All at your own risk!
 Place your iOS 7.1.x blob in the shsh folder with name: `<ECID>-iPhone5,2-7.1.2.shsh`  
 Please set the device to pwned DFU Mode, connect it, and run the following script.
 ```
-./idevicerestore -e -w restorenand.ipsw # for mac
-./idevicerestore_linux -e -w restorenand.ipsw # for linux
+./idevicerestore -e -w restorenand_n42ap_11D257.ipsw # for mac
+./idevicerestore_linux -e -w restorenand_n42ap_11D257.ipsw # for linux
 ```
 The device will reboot and enter recovery mode.  
 

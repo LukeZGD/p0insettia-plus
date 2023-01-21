@@ -10,28 +10,24 @@ Fork with Linux builds, updated scripts, and compiled payloads including untethe
 
 ## Supported devices
 - iPhone 5 (N41/N42) - iOS 10.3.4  
+- Untethered jailbreak supports N42 only
 
 ## Supported environments
 - macOS 10.13 (or later?) (intel/x86_64)
-- Linux x86_64
+- Linux x86_64/armhf/arm64
 
-## Make
-```
-git clone https://github.com/dora2-iOS/p0insettia --recursive && cd p0insettia
-./build.sh all
-```
-
-## semi-tethered jailbreak
+## Semi-tethered jailbreak
 Please refer to the build/ directory.  
 
-## semi-untethered jailbreak
+## Semi-untethered jailbreak
 It uses an IPA App based jailbreak. (reloader/ directory)   
 In order to use this, you need to jailbreak your device with "semi-tethered jailbreak" first.  
-The pre-built IPA file can be obtained from: [p0insettia](https://dora2ios.web.app/p0insettia.html)  
+The pre-built IPA file can be obtained in reloader/ directory.  
 You can use ReProvision Reborn (via [Packix](https://repo.packix.com/)) or similar to install and use IPA files on your device. All at your own risk.   
 
-## untethered jailbreak
-It uses an iBoot(iOS 7 iBoot) exploit based jailbreak. (ETA NOW)   
+## Untethered jailbreak
+It uses an iBoot(iOS 7 iBoot) exploit based jailbreak. (untether/ directory)   
+In order to use this, you need to jailbreak your device with "semi-tethered jailbreak" first.  
 
 ## Note for this jailbreak environment (iOS 10.3 or higher)  
 This jailbreak will not apply the nuke sandbox patch used by h3lix.  

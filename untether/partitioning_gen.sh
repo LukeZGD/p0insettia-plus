@@ -2,18 +2,17 @@
 
 cd "$(dirname "$0")"
 
-dl_files="../build/dl_files"
+dl_files="../build/dl_files.sh"
 hfsplus="../build/hfsplus"
 xpwntool="../build/xpwntool"
 if [[ $(uname) == "Linux" ]]; then
-    dl_files+="_linux"
     hfsplus+="_linux"
     xpwntool+="_linux"
 fi
 
 rm -rf image3/idsk
 
-$dl_files.sh
+$dl_files
 cp -R ../build/image3 .
 
 $xpwntool image3/rrdsk image3/rrdsk.dmg

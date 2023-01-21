@@ -20,7 +20,8 @@ elif [[ $1 == "11D201" ]]; then
 elif [[ $1 == "11D167" ]]; then
     url="https://secure-appldnld.apple.com/iOS7.1/031-4537.20140310.4PCL5/iPhone5,2_7.1_11D167_Restore.ipsw"
 else
-    echo "Error: no buildversion specified in arguments"
+    echo "[Error] No valid buildversion specified in argument."
+    echo "* Specify the buildversion of your SHSH blob. (11D167, 11D201, or 11D257)"
     exit 1
 fi
 
