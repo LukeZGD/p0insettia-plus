@@ -2,11 +2,19 @@
 
 cd "$(dirname "$0")"
 
-hfsplus="../build/hfsplus"
-xpwntool="../build/xpwntool"
+hfsplus="../build/bin/macos/hfsplus"
+xpwntool="../build/bin/macos/xpwntool"
 if [[ $(uname) == "Linux" ]]; then
-    hfsplus+="_linux"
-    xpwntool+="_linux"
+    dir="bin/linux/"
+    if [[ $(uname -m) == "a"* && $(getconf LONG_BIT) == 64 ]]; then
+        dir+="arm64"
+    elif [[ $(uname -m) == "a"* ]]; then
+        dir+="armhf"
+    else
+        dir+="x86_64"
+    fi
+    hfsplus="../build/$dir/hfsplus"
+    xpwntool="../build/$dir/xpwntool"
 fi
 
 # N42 11D257

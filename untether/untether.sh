@@ -2,11 +2,19 @@
 
 cd "$(dirname "$0")"
 
-untether="./untether"
-partialzip="../build/partialzip"
+untether="bin/macos/untether"
+partialzip="../build/bin/macos/partialzip"
 if [[ $(uname) == "Linux" ]]; then
-    untether+="_linux"
-    partialzip+="_linux"
+    dir="bin/linux/"
+    if [[ $(uname -m) == "a"* && $(getconf LONG_BIT) == 64 ]]; then
+        dir+="arm64"
+    elif [[ $(uname -m) == "a"* ]]; then
+        dir+="armhf"
+    else
+        dir+="x86_64"
+    fi
+    untether="$dir/untether"
+    partialzip="../build/$dir/partialzip"
 fi
 
 mkdir -p fw/Firmware/all_flash/all_flash.n42ap.production fw/Firmware/dfu fw/Firmware/usr/local/standalone 2>/dev/null
