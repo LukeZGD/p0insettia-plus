@@ -1,12 +1,10 @@
 # p0insettia
-A tool for [(semi-){un-(tethered jailbreak)}] of iOS 10.3.4 ~~32-bit devices~~ iPhone 5 with checkm8 BootROM exploit.  
-
-Fork with Linux builds, updated scripts, and compiled payloads including untether (requires iOS 7 SHSH blobs). Only tested semi-tether and untether on iPhone5,2 10.3.4 with 7.1.1 (11D201) blobs.
+- p0insettia is an iOS 10.3.4 jailbreak for iPhone 5 devices with checkm8 BootROM exploit.
+- p0insettia can be used as semi-tethered, semi-untethered, or fully untethered jailbreak.
+- This fork has updated scripts, Linux builds, and compiled payloads. Only tested semi-tether and untether on iPhone5,2 10.3.4 with 7.1.1 (11D201) blobs.
 
 ## Note
 - All at your own risk!  
-- The package used for this jailbreak can be obtained via Cydia from the following repository.  
-`https://dora2ios.github.io/repo`  
 
 ## Supported devices
 - iPhone 5 (N41/N42) - iOS 10.3.4  
@@ -23,10 +21,10 @@ Please refer to the build/ directory.
 It uses an IPA App based jailbreak. (reloader/ directory)   
 In order to use this, you need to jailbreak your device with "semi-tethered jailbreak" first.  
 The pre-built IPA file can be obtained in reloader/ directory.  
-You can use ReProvision Reborn (via [Packix](https://repo.packix.com/)) or similar to install and use IPA files on your device. All at your own risk.   
+You can use Sideloadly, ReProvision Reborn, or similar to install and use IPA files on your device. All at your own risk.   
 
 ## Untethered jailbreak
-It uses an iBoot(iOS 7 iBoot) exploit based jailbreak. (untether/ directory)   
+It uses an iBoot (iOS 7 iBoot) exploit based jailbreak. (untether/ directory)   
 In order to use this, you need to jailbreak your device with "semi-tethered jailbreak" first.  
 
 ## Note for this jailbreak environment (iOS 10.3 or higher)  

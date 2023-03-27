@@ -1,10 +1,8 @@
 # sock_port + p0insettia reloader
-A tool for semi-untethered jailbreak of iOS 10.3.4 ~~32-bit devices~~ iPhone 5 with socket exploit.  
+A tool for semi-untethered jailbreak of iOS 10.3.4 iPhone 5 with socket exploit.  
 
 ## Note
 - All at your own risk!  
-- The package used for this jailbreak can be obtained via Cydia from the following repository.  
-`https://dora2ios.github.io/repo`  
 
 ## Supported devices
 - iPhone 5 (N41/N42) - iOS 10.3.4  

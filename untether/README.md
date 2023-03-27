@@ -15,17 +15,17 @@ All at your own risk!
 
 ## Usage 
 - Your device must be jailbroken with p0insettia semi-tethered before installing this untether!
+- iOS 7.1.x SHSH blobs for your device are required to install this!
 
 ### Install old iboot and bootloader  
-- gen custom fw  
+- gen custom fw (change `<buildversion of shsh`)  
 ```
-./gen_fw_n42.sh <build version of blob> (example: ./gen_fw_n42.sh 11D257)
+./gen_fw_n42.sh <buildversion of shsh> (example: ./gen_fw_n42.sh 11D257)
 ```
 - restore nand_fw  
-Place your iOS 7.1.x blob in the shsh folder with name: `<ECID>-iPhone5,2-7.1.2.shsh`  
-Please set the device to **pwned DFU Mode** (use [iOS-OTA-Downgrader](https://github.com/LukeZGD/iOS-OTA-Downgrader) or [iPwnder Lite for iOS](https://github.com/LukeZGD/iOS-OTA-Downgrader/wiki/Pwning-Using-Another-iOS-Device)), connect it, and run the following script (change `11D257` to your build version if needed).
+Please set the device to **pwned DFU Mode** (use [iOS-OTA-Downgrader](https://github.com/LukeZGD/iOS-OTA-Downgrader) or [iPwnder Lite for iOS](https://github.com/LukeZGD/iOS-OTA-Downgrader/wiki/Pwning-Using-Another-iOS-Device)), connect it, and run the following script (change `<shsh file>` to your SHSH blob file).
 ```
-./restore_ipsw.sh
+./restore_ipsw.sh <shsh file> (example: ./restore_ipsw.sh myblob.shsh)
 ```
 The device will reboot and enter recovery mode.  
 
