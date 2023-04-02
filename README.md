@@ -3,6 +3,7 @@
 - p0insettia can be used as semi-tethered, semi-untethered, or fully untethered jailbreak.
 - This fork has updated scripts, Linux builds, and compiled payloads.
 - This fork installs Zebra instead of Cydia. (based on [socket jailbreak](https://github.com/staturnzz/socket))
+- iOS 7.1.x SHSH blobs for your device are required for the untether.
 - Only tested semi-tether and untether on iPhone5,2 10.3.4 with 7.1.1 (11D201) blobs.
 - [Download](https://github.com/LukeZGD/p0insettia/archive/refs/heads/main.zip)
 
