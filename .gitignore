@@ -2,14 +2,14 @@
 .DS_Store
 package.sh
 package/
-build/image3
+build/image3*
 build/ipwnder_lite
 untether/image3
 untether/fw
 untether/gen_fw
 untether/version.xml
 untether/restorenand*
-untether/shsh/*.shsh
+*.shsh*
 iphoneos-arm/iboot/prehook/payload.h
 iphoneos-arm/iboot/prehook/payload
 iphoneos-arm/iboot/prehook/payload.elf

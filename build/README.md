@@ -1,4 +1,4 @@
-# p0insettia - build
+# p0insettia semi-tether
 A tool for semi-tethered jailbreak for iOS 10.3.4 iPhone 5 with checkm8 BootROM exploit.  
 
 ## Note
@@ -15,9 +15,9 @@ All at your own risk!
 ```
 
 ## Usage 
-### Install loader / cydia  
+### Install Loader / Zebra  
 The first step is to add the loader app to the rootfs of the device.  
-Please set the device to **pwned DFU Mode** (use [iOS-OTA-Downgrader](https://github.com/LukeZGD/iOS-OTA-Downgrader) or [iPwnder Lite for iOS](https://github.com/LukeZGD/iOS-OTA-Downgrader/wiki/Pwning-Using-Another-iOS-Device)), connect it, and run the following script.  
+Please set the device to **pwned DFU Mode** (use [Legacy iOS Kit](https://github.com/LukeZGD/Legacy-iOS-Kit) or [iPwnder Lite for iOS](https://github.com/LukeZGD/Legacy-iOS-Kit/wiki/Pwning-Using-Another-iOS-Device)), connect it, and run the following script.
 ```
 ./ramdisk_boot.sh
 ```
@@ -36,16 +36,13 @@ Please open it and tap "Install Cydia".
 
 The device will reboot and enter recovery mode.  
 
-
-### Reboot and setup Cydia
-Perform the initial startup. Please set the device to **pwned DFU Mode**, connect it, and run the following script.  
+### Reboot and setup Zebra
+Perform the initial startup. Please set the device to **pwned DFU Mode**, connect it, and run the following script.
 ```
 ./tethered_boot.sh
 ```
 
-- Warning!  
-The current version uses an old bootstrap, so please update all packages immediately after opening Cydia.  
-Please turn off your device after the Cydia update is finished.  
+- Zebra should appear on the home screen after waiting for a few minutes.
 
 ### Fix recovery mode
 Now, when you try to reboot your device, it will boot in recovery mode. Connect the device in recovery mode to USB and run the following script.  
@@ -53,7 +50,7 @@ Now, when you try to reboot your device, it will boot in recovery mode. Connect 
 ./fix_recovery.sh
 ```
 
-The device will reboot and boot in non-jailbreak mode. If you want to boot in a jailbreak environment again, set the device to **pwned DFU mode** and run the following script.  
+The device will reboot and boot in non-jailbreak mode. If you want to boot in a jailbreak environment again, set the device to **pwned DFU mode** and run the following script.
 ```
 ./tethered_boot.sh
 ```

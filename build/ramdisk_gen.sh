@@ -21,7 +21,7 @@ rm -rf image3/rdsk
 
 $xpwntool image3/rrdsk image3/rrdsk.dmg
 
-$hfsplus image3/rrdsk.dmg grow 40000000
+$hfsplus image3/rrdsk.dmg grow 50000000
 
 $hfsplus image3/rrdsk.dmg mv usr/local/bin/restored_external usr/local/bin/restored_external_
 $hfsplus image3/rrdsk.dmg add ../iphoneos-arm/rdsk/restored_external usr/local/bin/restored_external

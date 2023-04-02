@@ -1,4 +1,4 @@
-# p0insettia - untether
+# p0insettia untether
 A tool for untethered jailbreak for iOS 10.3.4 iPhone 5 (iPhone5,2 Global only) with checkm8 BootROM exploit and iOS 7 iBoot exploit.
 
 ## Note
@@ -23,7 +23,7 @@ All at your own risk!
 ./gen_fw_n42.sh <buildversion of shsh> (example: ./gen_fw_n42.sh 11D257)
 ```
 - restore nand_fw  
-Please set the device to **pwned DFU Mode** (use [iOS-OTA-Downgrader](https://github.com/LukeZGD/iOS-OTA-Downgrader) or [iPwnder Lite for iOS](https://github.com/LukeZGD/iOS-OTA-Downgrader/wiki/Pwning-Using-Another-iOS-Device)), connect it, and run the following script (change `<shsh file>` to your SHSH blob file).
+Please set the device to **pwned DFU Mode** (use [Legacy iOS Kit](https://github.com/LukeZGD/Legacy-iOS-Kit) or [iPwnder Lite for iOS](https://github.com/LukeZGD/Legacy-iOS-Kit/wiki/Pwning-Using-Another-iOS-Device)), connect it, and run the following script (change `<shsh file>` to your SHSH blob file).
 ```
 ./restore_ipsw.sh <shsh file> (example: ./restore_ipsw.sh myblob.shsh)
 ```
