@@ -1,5 +1,5 @@
 # p0insettia untether
-A tool for untethered jailbreak for iOS 10.3.4 iPhone 5 (iPhone5,2 Global only) with checkm8 BootROM exploit and iOS 7 iBoot exploit.
+A tool for untethered jailbreak for iOS 10.3.4 iPhone 5/5C with checkm8 BootROM exploit and iOS 7 iBoot exploit.
 
 ## Note
 All at your own risk!  
@@ -9,8 +9,9 @@ All at your own risk!
 - Linux x86_64/armhf/arm64
 
 ## setup
+- change <device type> with `iphone5` for iPhone 5, `iphone5b` for iPhone 5C
 ```
-./partitioning_gen.sh
+./partitioning_gen.sh <device type>
 ```
 
 ## Usage 
@@ -18,9 +19,11 @@ All at your own risk!
 - iOS 7.1.x SHSH blobs for your device are required to install this!
 
 ### Install old iboot and bootloader  
-- gen custom fw (change `<buildversion of shsh`)  
+- gen custom fw
+- change `<device model>` to device's model (`n41` for iPhone5,1, `n42` for iPhone5,2, `n48` for iPhone5,3, `n49` for iPhone5,4)
+- change `<buildversion of shsh>`
 ```
-./gen_fw_n42.sh <buildversion of shsh> (example: ./gen_fw_n42.sh 11D257)
+./gen_fw.sh <device model> <buildversion of shsh> (example: ./gen_fw.sh n42 11D201)
 ```
 - restore nand_fw  
 Please set the device to **pwned DFU Mode** (use [Legacy iOS Kit](https://github.com/LukeZGD/Legacy-iOS-Kit) or [iPwnder Lite for iOS](https://github.com/LukeZGD/Legacy-iOS-Kit/wiki/Pwning-Using-Another-iOS-Device)), connect it, and run the following script (change `<shsh file>` to your SHSH blob file).

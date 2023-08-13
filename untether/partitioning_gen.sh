@@ -18,6 +18,16 @@ if [[ $(uname) == "Linux" ]]; then
     xpwntool="../build/$dir/xpwntool"
 fi
 
+case $1 in
+    "iphone5" | "iphone5b" ) device_model="$1";;
+    * )
+        echo "[Error] Invalid argument. Valid arguments:"
+        echo "    iphone5  - iPhone 5  (iPhone5,1, iPhone5,2)"
+        echo "    iphone5b - iPhone 5C (iPhone5,3, iPhone5,4)"
+        exit 1
+    ;;
+esac
+
 rm -rf image3/idsk
 
 $dl_files
@@ -30,11 +40,11 @@ $hfsplus image3/rrdsk.dmg grow 40000000
 $hfsplus image3/rrdsk.dmg untar src/binSB.tar
 
 $hfsplus image3/rrdsk.dmg mv usr/local/bin/restored_external usr/local/bin/restored_external_
-$hfsplus image3/rrdsk.dmg add src/n42/11d257/partition usr/local/bin/restored_external
+$hfsplus image3/rrdsk.dmg add src/$device_model/11D257/partition usr/local/bin/restored_external
 $hfsplus image3/rrdsk.dmg chmod 755 usr/local/bin/restored_external
 $hfsplus image3/rrdsk.dmg chown 0:0 usr/local/bin/restored_external
 
-$hfsplus image3/rrdsk.dmg add src/n42/11d257/exploit.dmg exploit.dmg
+$hfsplus image3/rrdsk.dmg add src/$device_model/11D257/exploit.dmg exploit.dmg
 $hfsplus image3/rrdsk.dmg chmod 644 exploit.dmg
 $hfsplus image3/rrdsk.dmg chown 0:0 exploit.dmg
 
@@ -42,4 +52,3 @@ $xpwntool image3/rrdsk.dmg image3/idsk -t image3/rrdsk
 rm -rf image3/rrdsk.dmg
 
 echo "[*] done!"
-echo "[*] n42 iBoot-1940.10.58 only!"

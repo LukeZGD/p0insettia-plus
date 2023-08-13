@@ -15,7 +15,16 @@ if [[ $(uname) == "Linux" ]]; then
     irecovery="sudo $dir/irecovery"
 fi
 
-$irecovery -f image3/iBoot.n42
+ProdCut=7 # cut 7 for ipod/ipad
+device_type=$($irecovery -qv 2>&1 | grep "Connected to iP" | cut -c 14-)
+if [[ $(echo "$device_type" | cut -c 3) == 'h' ]]; then
+    ProdCut=9 # cut 9 for iphone
+fi
+device_type=$(echo "$device_type" | cut -c -$ProdCut)
+case $device_type in
+    iPhone5,[12] ) $irecovery -f image3/iBoot.iphone5;;
+    iPhone5,[34] ) $irecovery -f image3/iBoot.iphone5b;;
+esac
 sleep 5
 
 $irecovery -f ../iphoneos-arm/iboot/payload
