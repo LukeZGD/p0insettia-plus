@@ -1,6 +1,23 @@
 #!/bin/bash
+#set -ex
+
+clean() {
+    rm -rf "$(dirname "$0")/restorenand"*/ 2>/dev/null
+}
+
+clean_sudo() {
+    sudo rm -rf "$(dirname "$0")/restorenand"*/
+}
+
+clean_usbmuxd() {
+    clean_sudo
+    sudo systemctl restart usbmuxd
+    sudo systemctl restart usbmuxd
+}
 
 cd "$(dirname "$0")"
+trap "clean" EXIT
+trap "exit 1" INT TERM
 
 idevicerestore="bin/macos/idevicerestore"
 irecovery="../build/bin/macos/irecovery"
@@ -15,10 +32,15 @@ if [[ $(uname) == "Linux" ]]; then
     fi
     idevicerestore="sudo $dir/idevicerestore"
     irecovery="sudo ../build/$dir/irecovery"
-    device_ecid=$((16#$($irecovery -q | grep "ECID" | cut -c 9-))) # converts hex ecid to dec
     sudo systemctl stop usbmuxd
     sudo -b usbmuxd -pf 2>/dev/null
-    usbmuxd_pid=$!
+    trap "clean_usbmuxd" EXIT
+fi
+
+if [[ ! -s $1 ]]; then
+    echo "[Error] No SHSH file specified in argument."
+    echo "* Specify the name of your SHSH file: ./restore_ipsw.sh my_7.1.x_blob.shsh"
+    exit 1
 fi
 
 ProdCut=7 # cut 7 for ipod/ipad
@@ -37,19 +59,12 @@ if [[ -z $device_model ]]; then
     echo "[Error] Device not found or detected. Plug in your device and try again."
     exit 1
 fi
-
-if [[ -z $1 ]]; then
-    echo "[Error] No SHSH file specified in argument."
-    echo "* Specify the name of your SHSH file: ./restore_ipsw.sh my_7.1.x_blob.shsh"
-    exit 1
-fi
+device_ecid=$((16#$($irecovery -q | grep "ECID" | cut -c 9-))) # converts hex ecid to dec
 
 echo "* Device: $device_type (${device_model}ap)"
 echo "* ECID: $device_ecid"
 cp $1 shsh/$device_ecid-$device_type-7.1.2.shsh
-$idevicerestore -ew restorenand_${device_model}_11D257.ipsw
-
-if [[ $(uname) == "Linux" ]]; then
-    kill $usbmuxd_pid
-    sudo systemctl restart usbmuxd
-fi
+ipsw="restorenand_${device_model}_11D257"
+mkdir $ipsw
+unzip -o "$ipsw.ipsw" -d "$ipsw/"
+$idevicerestore -ew $ipsw.ipsw
