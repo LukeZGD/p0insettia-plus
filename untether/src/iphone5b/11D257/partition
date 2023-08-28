@@ -1,53 +1,13 @@
 #!/bin/bash
 
+sleep 15s
+
 mount_hfs /dev/disk0s1s1 /mnt1
 mount_hfs /dev/disk0s1s2 /mnt1/private/var
 
 sleep 1s
 
-rm -rf /mnt1/System/Library/LaunchDaemons/com.apple.mobile.softwareupdated.plist
-rm -rf /mnt1/System/Library/LaunchDaemons/com.apple.softwareupdateservicesd.plist
-
-if [ -e "/ios8" ]; then
-  # step1
-  mv -v /mnt1/System/Library/LaunchDaemons/* /mnt1/Library/LaunchDaemons/
-  sleep 3s
-
-  # step2
-  mv -v /mnt1/Library/LaunchDaemons/bootps.plist /mnt1/System/Library/LaunchDaemons/
-  mv -v /mnt1/Library/LaunchDaemons/com.apple.CrashHousekeeping.plist /mnt1/System/Library/LaunchDaemons/
-  mv -v /mnt1/Library/LaunchDaemons/com.apple.MobileFileIntegrity.plist /mnt1/System/Library/LaunchDaemons/
-  mv -v /mnt1/Library/LaunchDaemons/com.apple.jetsamproperties.*.plist /mnt1/System/Library/LaunchDaemons/
-  mv -v /mnt1/Library/LaunchDaemons/com.apple.mDNSResponder.plist /mnt1/System/Library/LaunchDaemons/com.apple.mDNSResponder.plist__
-  sleep 3s
-
-  # step3
-  mv -v /mnt1/usr/libexec/CrashHousekeeping /mnt1/usr/libexec/CrashHousekeeping_
-  mv -v /mnt1/reloader /mnt1/usr/libexec/CrashHousekeeping
-  sleep 1s
-fi
-
-
-if [ -e "/ios9" ]; then
-  # step1
-  mv -v /mnt1/System/Library/LaunchDaemons/* /mnt1/Library/LaunchDaemons/
-  sleep 3s
-
-  # step2
-  mv -v /mnt1/Library/LaunchDaemons/bootps.plist /mnt1/System/Library/LaunchDaemons/
-  mv -v /mnt1/Library/LaunchDaemons/com.apple.CrashHousekeeping.plist /mnt1/System/Library/LaunchDaemons/
-  mv -v /mnt1/Library/LaunchDaemons/com.apple.MobileFileIntegrity.plist /mnt1/System/Library/LaunchDaemons/
-  mv -v /mnt1/Library/LaunchDaemons/com.apple.jetsamproperties.*.plist /mnt1/System/Library/LaunchDaemons/
-  sleep 3s
-
-  # step3
-  mv -v /mnt1/usr/libexec/CrashHousekeeping /mnt1/usr/libexec/CrashHousekeeping_
-  mv -v /mnt1/reloader /mnt1/usr/libexec/CrashHousekeeping
-  sleep 1s
-fi
-
-sleep 1s
-
+if [ ! -e "/dev/disk0s1s3" ]; then
 Data_GUID="$((echo -e "i\n2\nq") | gptfdisk /dev/rdisk0s1 2>/dev/null | sed -n -e 's/^.*Partition unique GUID: //p')"
 LogicalSector="$((echo -e "p\nq") | gptfdisk /dev/rdisk0s1 2>/dev/null | sed -n -e 's/^.*Logical sector size: //p' | sed 's/ .*//')"
 System_LastSector="$((echo -e "i\n1\nq") | gptfdisk /dev/rdisk0s1 2>/dev/null | sed -n -e 's/^.*Last sector: //p' | sed 's/ .*//')"
@@ -68,6 +28,7 @@ echo -e "d\n2\nn\n\n$New_Data_LastSector\n\nc\n2\nData\nx\na\n2\n48\n49\n\nc\n2\
 fi
 
 sleep 1s
+fi
 
 newfs_hfs -s -v exploit /dev/rdisk0s1s3
 sleep 1s

@@ -1,5 +1,5 @@
 # p0insettia semi-tether
-A tool for semi-tethered jailbreak for iOS 10.3.4 iPhone 5 with checkm8 BootROM exploit.  
+A tool for semi-tethered jailbreak for iOS 10.3.4 iPhone 5/5C with checkm8 BootROM exploit.
 
 ## Note
 All at your own risk!  
