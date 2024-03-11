@@ -11,8 +11,11 @@ clean_sudo() {
 
 clean_usbmuxd() {
     clean_sudo
-    sudo systemctl restart usbmuxd
-    sudo systemctl restart usbmuxd
+    sudo killall usbmuxd 2>/dev/null
+    if [[ $(which systemctl 2>/dev/null) ]]; then
+        sleep 1
+        sudo systemctl restart usbmuxd
+    fi
 }
 
 cd "$(dirname "$0")"
@@ -32,7 +35,9 @@ if [[ $(uname) == "Linux" ]]; then
     fi
     idevicerestore="sudo $dir/idevicerestore"
     irecovery="sudo ../build/$dir/irecovery"
-    sudo systemctl stop usbmuxd
+    if [[ $(which systemctl 2>/dev/null) ]]; then
+        sudo systemctl stop usbmuxd
+    fi
     sudo -b usbmuxd -pf 2>/dev/null
     trap "clean_usbmuxd" EXIT
 fi
@@ -56,10 +61,10 @@ case $device_type in
     iPhone5,4 ) device_model="n49";;
 esac
 if [[ -z $device_model ]]; then
-    echo "[Error] Device not found or detected. Plug in your device and try again."
+    echo "[Error] Device not found or detected. Plug in your device in pwned DFU mode and try again."
     exit 1
 fi
-device_ecid=$((16#$($irecovery -q | grep "ECID" | cut -c 9-))) # converts hex ecid to dec
+device_ecid=$(printf "%d" $($irecovery -q | grep "ECID" | cut -c 7-)) # converts hex ecid to dec
 
 echo "* Device: $device_type (${device_model}ap)"
 echo "* ECID: $device_ecid"
