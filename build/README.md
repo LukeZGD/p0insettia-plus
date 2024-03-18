@@ -17,13 +17,13 @@ All at your own risk!
 ## Usage 
 ### Install Loader / Zebra  
 The first step is to add the loader app to the rootfs of the device.  
-Please set the device to **pwned DFU Mode** (use [Legacy iOS Kit](https://github.com/LukeZGD/Legacy-iOS-Kit) or [iPwnder Lite for iOS](https://github.com/LukeZGD/Legacy-iOS-Kit/wiki/Pwning-Using-Another-iOS-Device)), connect it, and run the following script.
+Please set the device to **pwned DFU Mode**. Use [Legacy iOS Kit](https://github.com/LukeZGD/Legacy-iOS-Kit) (Other Utilities -> Send Pwned iBSS) or [iPwnder Lite for iOS](https://github.com/LukeZGD/Legacy-iOS-Kit/wiki/Pwning-Using-Another-iOS-Device). Then run the following script.
 ```
 ./ramdisk_boot.sh
 ```
 
 The device will reboot and enter recovery mode.  
-Please set the device to **pwned DFU Mode**, connect it, and run the following script.  
+Please set the device to **pwned DFU Mode** and run the following script.
 ```
 ./tethered_boot.sh
 ```
@@ -37,7 +37,7 @@ Please open it and tap "Install Cydia".
 The device will reboot and enter recovery mode.  
 
 ### Reboot and setup Zebra
-Perform the initial startup. Please set the device to **pwned DFU Mode**, connect it, and run the following script.
+Perform the initial startup. Please set the device to **pwned DFU Mode** and run the following script.
 ```
 ./tethered_boot.sh
 ```
