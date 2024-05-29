@@ -22,10 +22,6 @@ url="https://updates.cdn-apple.com/2019/ios/091-25277-20190722-0C1B94DE-992C-11E
 mkdir image3 2>/dev/null
 $partialzip $url 058-75249-065.dmg image3/rrdsk
 $partialzip $url Firmware/dfu/iBEC.iphone5.RELEASE.dfu image3/iBoot.n42
-$partialzip $url Firmware/dfu/iBEC.iphone5b.RELEASE.dfu image3/iBoot.iphone5b
 
 $dl_files
 mv image3/iBoot.n42 image3/iBoot.iphone5
-mv image3/iBoot.iphone5b image3/iBoot.n42
-$dl_files
-mv image3/iBoot.n42 image3/iBoot.iphone5b

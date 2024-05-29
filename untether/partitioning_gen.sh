@@ -18,16 +18,7 @@ if [[ $(uname) == "Linux" ]]; then
     xpwntool="../build/$dir/xpwntool"
 fi
 
-case $1 in
-    "iphone5" | "iphone5b" ) device_model="$1";;
-    * )
-        echo "[Error] Invalid argument. Valid arguments:"
-        echo "    iphone5  - iPhone 5  (iPhone5,1, iPhone5,2)"
-        echo "    iphone5b - iPhone 5C (iPhone5,3, iPhone5,4)"
-        exit 1
-    ;;
-esac
-
+device_model="iphone5"
 rm -rf image3/idsk
 
 $dl_files

@@ -1,5 +1,5 @@
 # p0insettia plus
-- p0insettia plus is a fork of p0insettia, an iOS 10.3.4 jailbreak for iPhone 5/5C devices with checkm8 BootROM exploit.
+- p0insettia plus is a fork of p0insettia, an iOS 10.3.4 jailbreak for iPhone 5 devices with checkm8 BootROM exploit.
 - p0insettia can be used as semi-tethered, semi-untethered, or fully untethered jailbreak.
 - This fork has updated scripts, Linux builds, and compiled payloads.
 - This fork installs Zebra instead of Cydia. (based on [socket jailbreak](https://github.com/staturnzz/socket))
@@ -12,10 +12,9 @@
 
 ## Supported devices
 - iPhone 5 (N41/N42) - iOS 10.3.4
-- iPhone 5C (N48/N49) - iOS 10.3.4 (untested)
 
 ## Supported environments
-- macOS 10.13 (or later?) (intel/x86_64)
+- macOS 10.13 or later
 - Linux x86_64/armhf/arm64
 
 ## Semi-tethered jailbreak
