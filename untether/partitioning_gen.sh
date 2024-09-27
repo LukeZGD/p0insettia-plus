@@ -3,8 +3,11 @@
 cd "$(dirname "$0")"
 
 dl_files="../build/dl_files.sh"
-hfsplus="../build/bin/macos/hfsplus"
-xpwntool="../build/bin/macos/xpwntool"
+if [[ $(uname) == "Darwin" && $(uname -a) == "arm64" ]]; then
+    platform_arch="/arm64"
+fi
+hfsplus="../build/bin/macos$platform_arch/hfsplus"
+xpwntool="../build/bin/macos$platform_arch/xpwntool"
 if [[ $(uname) == "Linux" ]]; then
     dir="bin/linux/"
     if [[ $(uname -m) == "a"* && $(getconf LONG_BIT) == 64 ]]; then

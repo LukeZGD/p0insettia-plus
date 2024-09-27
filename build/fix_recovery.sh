@@ -2,8 +2,13 @@
 
 cd "$(dirname "$0")"
 
-irecovery="bin/macos/irecovery"
-if [[ $(uname) == "Linux" ]]; then
+if [[ $(uname) == "Darwin" ]]; then
+    dir="bin/macos/"
+    if [[ $(uname -a) == "arm64" ]]; then
+        dir+="arm64"
+    fi
+    irecovery="$dir/irecovery"
+elif [[ $(uname) == "Linux" ]]; then
     dir="bin/linux/"
     if [[ $(uname -m) == "a"* && $(getconf LONG_BIT) == 64 ]]; then
         dir+="arm64"

@@ -2,8 +2,11 @@
 
 cd "$(dirname "$0")"
 
-untether="bin/macos/untether"
-partialzip="../build/bin/macos/partialzip"
+if [[ $(uname) == "Darwin" && $(uname -a) == "arm64" ]]; then
+    platform_arch="/arm64"
+fi
+untether="bin/macos$platform_arch/untether"
+partialzip="../build/bin/macos$platform_arch/partialzip"
 if [[ $(uname) == "Linux" ]]; then
     dir="bin/linux/"
     if [[ $(uname -m) == "a"* && $(getconf LONG_BIT) == 64 ]]; then

@@ -2,9 +2,12 @@
 
 cd "$(dirname "$0")"
 
-hfsplus="bin/macos/hfsplus"
-xpwntool="bin/macos/xpwntool"
-if [[ $(uname) == "Linux" ]]; then
+if [[ $(uname) == "Darwin" ]]; then
+    dir="bin/macos/"
+    if [[ $(uname -a) == "arm64" ]]; then
+        dir+="arm64"
+    fi
+elif [[ $(uname) == "Linux" ]]; then
     dir="bin/linux/"
     if [[ $(uname -m) == "a"* && $(getconf LONG_BIT) == 64 ]]; then
         dir+="arm64"
@@ -13,9 +16,9 @@ if [[ $(uname) == "Linux" ]]; then
     else
         dir+="x86_64"
     fi
-    hfsplus="$dir/hfsplus"
-    xpwntool="$dir/xpwntool"
 fi
+hfsplus="$dir/hfsplus"
+xpwntool="$dir/xpwntool"
 
 rm -rf image3/rdsk
 

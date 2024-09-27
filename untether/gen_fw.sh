@@ -3,10 +3,13 @@
 cd "$(dirname "$0")"
 
 bspatch="$(which bspatch 2>/dev/null)"
-hfsplus="../build/bin/macos/hfsplus"
-partialzip="../build/bin/macos/partialzip"
-untether="bin/macos/untether"
-xpwntool="../build/bin/macos/xpwntool"
+if [[ $(uname) == "Darwin" && $(uname -a) == "arm64" ]]; then
+    platform_arch="/arm64"
+fi
+hfsplus="../build/bin/macos$platform_arch/hfsplus"
+partialzip="../build/bin/macos$platform_arch/partialzip"
+untether="bin/macos$platform_arch/untether"
+xpwntool="../build/bin/macos$platform_arch/xpwntool"
 if [[ $(uname) == "Linux" ]]; then
     dir="bin/linux/"
     if [[ $(uname -m) == "a"* && $(getconf LONG_BIT) == 64 ]]; then
@@ -125,7 +128,7 @@ $bspatch fw/Firmware/dfu/"$IBEC".dec fw/Firmware/dfu/"$IBEC".pwnd injection/firm
 mv fw/Firmware/dfu/"$IBEC".dfu fw/Firmware/dfu/"$IBEC"_TMP.dfu
 $xpwntool fw/Firmware/dfu/"$IBEC".pwnd fw/Firmware/dfu/"$IBEC".dfu -t fw/Firmware/dfu/"$IBEC"_TMP.dfu
 
-# pyld 
+# pyld
 $xpwntool ../iphoneos-arm/iboot/payload_untether fw/Firmware/all_flash/all_flash."$MODEL"ap.production/applelogoP@2x~iphone.s5l8950x.img3 -t src/pyld_template.img3
 
 # m

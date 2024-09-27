@@ -22,8 +22,11 @@ cd "$(dirname "$0")"
 trap "clean" EXIT
 trap "exit 1" INT TERM
 
-idevicerestore="bin/macos/idevicerestore"
-irecovery="../build/bin/macos/irecovery"
+if [[ $(uname) == "Darwin" && $(uname -a) == "arm64" ]]; then
+    platform_arch="/arm64"
+fi
+idevicerestore="bin/macos$platform_arch/idevicerestore"
+irecovery="../build/bin/macos$platform_arch/irecovery"
 if [[ $(uname) == "Linux" ]]; then
     dir="bin/linux/"
     if [[ $(uname -m) == "a"* && $(getconf LONG_BIT) == 64 ]]; then
