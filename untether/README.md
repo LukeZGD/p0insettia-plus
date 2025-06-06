@@ -25,7 +25,7 @@ All at your own risk!
 ./gen_fw.sh <device model> <buildversion of shsh> (example: ./gen_fw.sh n42 11D201)
 ```
 - restore nand_fw  
-Please set the device to **pwned DFU Mode**. Use [Legacy iOS Kit](https://github.com/LukeZGD/Legacy-iOS-Kit) (Other Utilities -> Send Pwned iBSS) or [iPwnder Lite for iOS](https://github.com/LukeZGD/Legacy-iOS-Kit/wiki/Pwning-Using-Another-iOS-Device)) Then run the following script (change `<shsh file>` to your SHSH blob file).
+Please set the device to **pwned DFU Mode**. Use [Legacy iOS Kit](https://github.com/LukeZGD/Legacy-iOS-Kit) (Useful Utilities -> Send Pwned iBSS) or [iPwnder Lite for iOS](https://github.com/LukeZGD/Legacy-iOS-Kit/wiki/Pwning-Using-Another-iOS-Device)) Then run the following script (change `<shsh file>` to your SHSH blob file).
 ```
 ./restore_ipsw.sh <shsh file> (example: ./restore_ipsw.sh myblob.shsh)
 ```

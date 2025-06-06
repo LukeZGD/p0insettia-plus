@@ -17,7 +17,7 @@ All at your own risk!
 ## Usage 
 ### Install Loader / Zebra  
 The first step is to add the loader app to the rootfs of the device.  
-Please set the device to **pwned DFU Mode**. Use [Legacy iOS Kit](https://github.com/LukeZGD/Legacy-iOS-Kit) (Other Utilities -> Send Pwned iBSS) or [iPwnder Lite for iOS](https://github.com/LukeZGD/Legacy-iOS-Kit/wiki/Pwning-Using-Another-iOS-Device). Then run the following script.
+Please set the device to **pwned DFU Mode**. Use [Legacy iOS Kit](https://github.com/LukeZGD/Legacy-iOS-Kit) (Useful Utilities -> Send Pwned iBSS) or [iPwnder Lite for iOS](https://github.com/LukeZGD/Legacy-iOS-Kit/wiki/Pwning-Using-Another-iOS-Device). Then run the following script.
 ```
 ./ramdisk_boot.sh
 ```
